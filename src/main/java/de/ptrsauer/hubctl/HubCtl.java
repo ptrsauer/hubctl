@@ -3,6 +3,7 @@ package de.ptrsauer.hubctl;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Command(name = "hubctl",
@@ -16,8 +17,8 @@ public class HubCtl implements Runnable {
     private final TokenReader tokenReader = new TokenReader();
 
     public void run() {
-        String token = tokenReader.getToken();
-        System.out.println("GitHub-Token: " + token);
+        Optional<String> token = tokenReader.getToken();
+        System.out.println("GitHub-Token: " + token.map(String::toString).orElse("Sorry, no token found in ~/.hubctl"));
     }
 
     public static void main(String[] args) {
@@ -25,6 +26,10 @@ public class HubCtl implements Runnable {
         commandLine.parseArgs(args);
         if (commandLine.isUsageHelpRequested()) {
             commandLine.usage(System.out);
+            return;
+        }
+        if (commandLine.isVersionHelpRequested()) {
+            commandLine.printVersionHelp(System.out);
             return;
         }
         int exitCode = commandLine.execute(args);

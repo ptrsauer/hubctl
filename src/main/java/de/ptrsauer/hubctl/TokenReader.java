@@ -12,8 +12,8 @@ class TokenReader {
         tokenOpt.ifPresent(token -> this.token = token);
     }
 
-    Optional<String> getToken() {
-        return Optional.ofNullable(token);
+    String getToken() {
+        return token;
     }
 
     private Optional<String> readToken() {

@@ -12,6 +12,6 @@ jobs:
     - name: Setup GraalVM environment
       uses: DeLaGuardo/setup-graalvm@2.0
       with:
-        graalvm-version: '19.2.1'
+        graalvm-version: '19.2.1.java8'
     - name: Build with Maven
       run: mvn -B package --file pom.xml

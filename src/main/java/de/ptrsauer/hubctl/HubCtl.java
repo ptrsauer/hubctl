@@ -1,9 +1,8 @@
 package de.ptrsauer.hubctl;
 
+import de.ptrsauer.hubctl.githubclient.GitHubClient;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-
-import java.util.Optional;
 
 @Command(name = "hubctl",
         mixinStandardHelpOptions = true,
@@ -13,13 +12,17 @@ public class HubCtl implements Runnable {
 
     private final TokenReader tokenReader = new TokenReader();
     private final RepositoryReader repositoryReader = new RepositoryReader();
+    private final GitHubClient gitHubClient = new GitHubClient();
 
     public void run() {
-        Optional<String> token = tokenReader.getToken();
-        System.out.println("GitHub-Token: " + token.map(String::toString).orElse("Sorry, no token found in ~/.hubctl"));
+        String token = tokenReader.getToken();
+        System.out.println("GitHub-Token: " + token);
 
         System.out.println("\nConfigured repositories:");
         repositoryReader.readRepositoryUrls().forEach(System.out::println);
+
+        System.out.println("\nSome Issues to work on:");
+        repositoryReader.readRepositoryUrls().stream().map(repoUrl -> gitHubClient.getIssuesForRepository(token, repoUrl)).forEach(System.out::println);
     }
 
     public static void main(String[] args) {

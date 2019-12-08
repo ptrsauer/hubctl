@@ -4,15 +4,12 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Command(name = "hubctl",
         mixinStandardHelpOptions = true,
         version = "0.0.1",
         description = "List your Issues and Pull Requests from GitHub.")
 public class HubCtl implements Runnable {
-
-    private static Logger log = Logger.getLogger(HubCtl.class.getSimpleName());
 
     private final TokenReader tokenReader = new TokenReader();
     private final RepositoryReader repositoryReader = new RepositoryReader();

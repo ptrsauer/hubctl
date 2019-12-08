@@ -1,12 +1,9 @@
 package de.ptrsauer.hubctl;
 
 import java.util.Optional;
-import java.util.logging.Logger;
 
 class TokenReader {
-    private Logger log = Logger.getLogger(this.getClass().getSimpleName());
-
-    private HubCtlFile hubCtlFile = new HubCtlFile();
+    private final HubCtlFile hubCtlFile = new HubCtlFile();
 
     private String token;
 

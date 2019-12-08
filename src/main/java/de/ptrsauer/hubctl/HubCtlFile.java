@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class HubCtlFile {
-    private static Logger log = Logger.getLogger(HubCtlFile.class.getSimpleName());
+    private static final Logger log = Logger.getLogger(HubCtlFile.class.getSimpleName());
 
     public List<String> readHubCtlConfigFileLines() {
         String homeDir = System.getProperty("user.home");

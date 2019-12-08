@@ -15,10 +15,14 @@ public class HubCtl implements Runnable {
     private static Logger log = Logger.getLogger(HubCtl.class.getSimpleName());
 
     private final TokenReader tokenReader = new TokenReader();
+    private final RepositoryReader repositoryReader = new RepositoryReader();
 
     public void run() {
         Optional<String> token = tokenReader.getToken();
         System.out.println("GitHub-Token: " + token.map(String::toString).orElse("Sorry, no token found in ~/.hubctl"));
+
+        System.out.println("\nConfigured repositories:");
+        repositoryReader.readRepositoryUrls().forEach(System.out::println);
     }
 
     public static void main(String[] args) {

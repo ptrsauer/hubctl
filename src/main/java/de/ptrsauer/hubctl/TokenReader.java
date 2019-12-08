@@ -13,15 +13,11 @@ class TokenReader {
 
     TokenReader() {
         Optional<String> tokenOpt = readToken();
-        if (tokenOpt.isPresent()) {
-            this.token = tokenOpt.get();
-        } else {
-            System.exit(1);
-        }
+        tokenOpt.ifPresent(token -> this.token = token);
     }
 
-    String getToken() {
-        return token;
+    Optional<String> getToken() {
+        return Optional.ofNullable(token);
     }
 
     private Optional<String> readToken() {
